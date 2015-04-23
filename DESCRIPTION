@@ -9,6 +9,6 @@ Depends: R (>= 3.1.0)
 License: Artistic-2.0
 LazyData: true
 BiocViews: RNA-Seq, MultipleComparison, Genetics
-Imports: plots
+Imports: gplots
 Suggests: knitr, testthat
 VignetteBuilder: knitr
