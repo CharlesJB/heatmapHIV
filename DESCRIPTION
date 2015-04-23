@@ -1,0 +1,14 @@
+Package: heatmapHIV
+Title: Produce heatmaps for RNA-Seq HIV data
+Version: 0.2.2
+Authors@R: person("Charles", "Joly Beauparlant", role=c("aut", "cre"),
+    email="Charles.Joly-Beauparlant@crchul.ulaval.ca")
+Description: This package is a wrapper aroung the heatmaps.2 function from
+    the gplots package to make is as easy as possible to produce an heatmap.
+Depends: R (>= 3.1.0)
+License: Artistic-2.0
+LazyData: true
+BiocViews: RNA-Seq, MultipleComparison, Genetics
+Imports: plots
+Suggests: knitr, testthat
+VignetteBuilder: knitr
