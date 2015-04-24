@@ -17,6 +17,23 @@
 #' @export
 #' @import gplots
 heatmapHIV <- function(counts, gene_list, filter = NULL, heatmap = TRUE) {
+  # Check param
+  if (!file.exists(counts)) {
+    stop(paste("counts file not found:", counts))
+  }
+  if (!file.exists(gene_list)) {
+    stop(paste("gene_list file not found:", gene_list))
+  }
+  if (!is.null(filter) & class(filter) != "character") {
+    stop("filter param must be NULL or of class character")
+  }
+  if (!is.null(filter) & filter == "") {
+    stop("filter param must be at least one character long")
+  }
+  if (!is.logical(heatmap)) {
+    stop("heatmap param must be TRUE of FALSE")
+  }
+
   # Import the datasets
   counts <- read.table(counts, header = TRUE, stringsAsFactors = FALSE)
   gene_list <- read.table(gene_list, header = FALSE,
@@ -41,7 +58,11 @@ heatmapHIV <- function(counts, gene_list, filter = NULL, heatmap = TRUE) {
       # Group the columns that will be used to order the data.frame
       counts <- counts[,c(which(i), which(!i))]
       # Order the data.frame
-      i <- order(rowMeans(counts[,i]), decreasing = TRUE)
+      if (sum(i) > 1) {
+        i <- order(rowMeans(counts[,i]), decreasing = TRUE)
+      } else {
+        i <- order(counts[,i], decreasing = TRUE)
+      }
       counts <- counts[i,]
     }
   }
