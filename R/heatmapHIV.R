@@ -6,6 +6,7 @@
 #' @param filter Order on a subset of column matching value of \code{filter}.
 #'               When \code{NULL}, a clustering of the columns will be done
 #'               instead. Default: \code{NULL}.
+#' @param heatmap Should the function produce an heatmap. Default: TRUE
 #' @return Invisibly return the \code{matrix} used to produce the heatmap.
 #'
 #' @examples
@@ -15,7 +16,7 @@
 #'
 #' @export
 #' @import gplots
-heatmapHIV <- function(counts, gene_list, filter = NULL) {
+heatmapHIV <- function(counts, gene_list, filter = NULL, heatmap = TRUE) {
   # Import the datasets
   counts <- read.table(counts, header = TRUE, stringsAsFactors = FALSE)
   gene_list <- read.table(gene_list, header = FALSE,
@@ -47,15 +48,17 @@ heatmapHIV <- function(counts, gene_list, filter = NULL) {
 
   # Produce the matrix and the heatmap
   counts <- as.matrix(counts)
-  heatmap.2(counts,
-	    col = redgreen(75),
-	    scale = "row",
-	    key = TRUE,
-	    keysize = 1.5,
-	    density.info = "none",
-	    cexCol = 0.4,
-	    cexRow = 0.2,
-	    trace = "none",
-	    dendrogram = dendrogram)
+  if (heatmap == TRUE) {
+    heatmap.2(counts,
+              col = redgreen(75),
+              scale = "row",
+              key = TRUE,
+              keysize = 1.5,
+              density.info = "none",
+              cexCol = 0.4,
+              cexRow = 0.2,
+              trace = "none",
+              dendrogram = dendrogram)
+  }
   invisible(counts)
 }
