@@ -1,2 +1,2 @@
 library(testthat)
-test_check("chipcompare")
+test_check("heatmapHIV")

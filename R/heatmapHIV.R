@@ -24,11 +24,13 @@ heatmapHIV <- function(counts, gene_list, filter = NULL, heatmap = TRUE) {
   if (!file.exists(gene_list)) {
     stop(paste("gene_list file not found:", gene_list))
   }
-  if (!is.null(filter) & class(filter) != "character") {
-    stop("filter param must be NULL or of class character")
-  }
-  if (!is.null(filter) & filter == "") {
-    stop("filter param must be at least one character long")
+  if (!is.null(filter)) {
+    if (class(filter) != "character") {
+      stop("filter param must be NULL or of class character")
+    }
+    if (filter == "") {
+      stop("filter param must be at least one character long")
+    }
   }
   if (!is.logical(heatmap)) {
     stop("heatmap param must be TRUE of FALSE")
