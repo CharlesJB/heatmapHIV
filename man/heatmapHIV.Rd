@@ -4,13 +4,17 @@
 \alias{heatmapHIV}
 \title{Produce a heatmap}
 \usage{
-heatmapHIV(counts, gene_list)
+heatmapHIV(counts, gene_list, filter = NULL)
 }
 \arguments{
 \item{counts}{The filename of the RPKM or raw count matrix.}
 
 \item{gene_list}{The filename of the gene list to subset the matrix before
 producing the heatmap.}
+
+\item{filter}{Order on a subset of column matching value of \code{filter}.
+When \code{NULL}, a clustering of the columns will be done
+instead. Default: \code{NULL}.}
 }
 \value{
 Invisibly return the \code{matrix} used to produce the heatmap.
