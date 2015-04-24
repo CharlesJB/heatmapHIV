@@ -1,0 +1,58 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{A package to facilitate the production of heatmaps}
+-->
+
+heatmapHIV: A package to facilitate the production of heatmaps
+=================================================================
+
+# Introduction
+
+This short vignette will show how to use the `heatmapHIV` package.
+
+```{r loadLibrary}
+suppressMessages(library(heatmapHIV))
+```
+
+The main function is named `heatmapHIV` and will produce an heatmap using the
+following files as input:
+
+* A RPKM or raw data matrix in tsv format.
+* A list of gene in csv format (one gene by line).
+
+We need to give the function the path to both filename.
+
+For this demo, we will use toy examples available with this package:
+
+```{r loadToyExamples}
+rpkm <- get_toy_rpkm()
+gene_list <- get_toy_gene_list()
+rpkm
+gene_list
+```
+
+Once we have the path to the file, producing an heatmap is very simple:
+
+```{r produceHeatmap}
+heatmapHIV(rpkm, gene_list)
+```
+
+By default, the sequences will be clustered on columns only. It is also
+possible to use the `filter` parameter to sort the rows based on the mean
+RPKM of a subset of columns. The `filter` param is a character string that
+that is found in the names of the columns we wish to use to sort the rows.
+
+For instance, if we wish to order the matrix using the columns that contains
+the pattern `Exp`:
+
+```{r showFilter}
+heatmapHIV(rpkm, gene_list, filter = "Exp")
+```
+
+Finally, the final `matrix` used to produce the heatmap is silently returned:
+
+```{r silentMatrix}
+current_matrix <- heatmapHIV(rpkm, gene_list)
+class(current_matrix)
+dim(current_matrix)
+```
